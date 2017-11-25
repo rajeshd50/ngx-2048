@@ -36,15 +36,15 @@
   </div>
   <div class="control-container" *ngIf="defaultConfig && defaultConfig.controls">
     <div class="btn-container">
-        <div class="row">
+        <div class="g_row">
             <button class="ctl-btn up" (click)="swipe(SWIPE_ACTION.UP)">&uarr;</button>
         </div>
-        <div class="row">
+        <div class="g_row">
             <button class="ctl-btn left" (click)="swipe(SWIPE_ACTION.LEFT)">&larr;</button>
             <button class="btn-rnd" (click)="screenshot()">&#9786;</button>
             <button class="ctl-btn right" (click)="swipe(SWIPE_ACTION.RIGHT)">&rarr;</button>
         </div>
-        <div class="row">
+        <div class="g_row">
             <button class="ctl-btn down" (click)="swipe(SWIPE_ACTION.DOWN)">&darr;</button>
         </div>
     </div>

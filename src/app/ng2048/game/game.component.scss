@@ -56,11 +56,12 @@
         text-align: center;
         margin-top: 20px;
         .btn-container {
-            max-width: 50%;
+            max-width: 70%;
+            width: auto;
             margin: 0 auto;
             border-radius: 50%;
             background: #f3f3f3;
-            .row{
+            .g_row{
                 display: block;
                 width: 100%;
                 .ctl-btn {
@@ -258,7 +259,7 @@
     }
     .control-container {
         .btn-container {
-            .row {
+            .g_row {
                 .ctl-btn {
                     color: #fff;
                     background: rgb(76,76,76); /* Old browsers */
@@ -435,7 +436,7 @@
             background-image:-o-linear-gradient(right bottom, #80d7ff 0%, #53f55b 31%,#628ef5 53%,#ccb221 79%,#ff7070 100%);
             background-image:-ms-linear-gradient(right bottom, #80d7ff 0%, #53f55b 31%,#628ef5 53%,#ccb221 79%,#ff7070 100%);
             background-image:-webkit-gradient(linear, right bottom, left top, color-stop(0%,#80d7ff), color-stop(31%,#53f55b),color-stop(53%,#628ef5),color-stop(79%,#ccb221),color-stop(100%,#ff7070));
-            .row {
+            .g_row {
                 .ctl-btn {
                     color: #000;
                     background: rgb(183,222,237); /* Old browsers */

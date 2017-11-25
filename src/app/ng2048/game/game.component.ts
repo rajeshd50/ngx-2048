@@ -9,7 +9,7 @@ import { Component,
          ElementRef 
        } from '@angular/core';
 import { GameService } from '../game.service';
-import * as html2canvas from "html2canvas"
+var html2canvas = require("html2canvas");
 
 @Component({
   selector: 'app-game-2048',

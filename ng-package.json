@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "./src/public_api.ts",
+    "externals": {
+    	"html2canvas": "./node_modules/html2canvas/*"
+    }
+  }
+}
