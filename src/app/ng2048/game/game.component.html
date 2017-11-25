@@ -1,0 +1,52 @@
+<div class="game-container {{defaultConfig ? defaultConfig.theme: ''}}" (swipeleft)="swipe_a(SWIPE_ACTION.LEFT)" (swiperight)="swipe_a(SWIPE_ACTION.RIGHT)" (swipeup)="swipe_a(SWIPE_ACTION.UP)" (swipedown)="swipe_a(SWIPE_ACTION.DOWN)">
+  <div class="themecontrol" *ngIf="defaultConfig && defaultConfig.themeControl">
+    <form>
+      <select name="theme" [(ngModel)]="defaultConfig.theme" (change)="change_theme()">
+        <option *ngFor="let opt of allThemes" [value]="opt" [selected]="opt === defaultConfig.theme" style="text-transform: capitalize;">{{opt}}</option>
+      </select>
+    </form>
+  </div>
+  <div class="stats" *ngIf="defaultConfig && defaultConfig.scoreIndicator">
+    <div class="highscore">
+      <span class="txt">High Score</span>
+      <span class="score">{{highScore}}</span>
+    </div>
+    <div class="ngame">
+      <button (click)="newgame()">New Game</button>
+    </div>
+    <div class="currscore">
+      <span class="txt">Score</span>
+      <span class="score">{{score}}</span>
+    </div>
+  </div>
+  <div class="board-container" #game>
+    <div class="board-row" *ngFor="let row of gameState">
+      <div class="board-cell {{cell == 0 ? 'zero': 'num'+cell}}" *ngFor="let cell of row">
+        <span>{{cell == 0 ? '&nbsp;': cell}}</span>
+      </div>
+    </div>
+    <div class="over" *ngIf="lastAction && lastAction.deadlock">
+      <div class="container">
+        <div class="text">Game Over</div>
+        <div class="btn-cnt">
+          <button class="newgame" (click)="newgame()">New Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="control-container" *ngIf="defaultConfig && defaultConfig.controls">
+    <div class="btn-container">
+        <div class="row">
+            <button class="ctl-btn up" (click)="swipe(SWIPE_ACTION.UP)">&uarr;</button>
+        </div>
+        <div class="row">
+            <button class="ctl-btn left" (click)="swipe(SWIPE_ACTION.LEFT)">&larr;</button>
+            <button class="btn-rnd" (click)="screenshot()">&#9786;</button>
+            <button class="ctl-btn right" (click)="swipe(SWIPE_ACTION.RIGHT)">&rarr;</button>
+        </div>
+        <div class="row">
+            <button class="ctl-btn down" (click)="swipe(SWIPE_ACTION.DOWN)">&darr;</button>
+        </div>
+    </div>
+  </div>
+</div>
