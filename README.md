@@ -4,7 +4,11 @@ Angular 5 component for the popular game 2048.
 
 ## Usages
 
-First install the module, then Import it
+First install the module,
+
+`npm i ngx2048 --save`
+
+then Import it
 `import { Ng2048Module } from 'ngx-2048';`
 
 Then add to import section of your app

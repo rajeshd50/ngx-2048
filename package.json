@@ -14,7 +14,6 @@
     "name": "Rajesh Dan",
     "email": "rajeshdan50@gmail.com"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
