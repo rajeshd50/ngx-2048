@@ -14,7 +14,8 @@
     "name": "Rajesh Dan",
     "email": "rajeshdan50@gmail.com"
   },
-  "dependencies": {
+  "main": "dist/main.bundle.js",
+  "peerDependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
