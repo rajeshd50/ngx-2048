@@ -34,17 +34,7 @@ export declare class GameService {
     /**
      * Get current config
      */
-    getConfig(): {
-        grid: number;
-        touch: boolean;
-        controls: boolean;
-        keys: boolean;
-        themeControl: boolean;
-        scoreIndicator: boolean;
-        highScore: boolean;
-        rememberState: boolean;
-        theme: string;
-    };
+    getConfig(): any;
     /**
      * Get all supported themes
      */

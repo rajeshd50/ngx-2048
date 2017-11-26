@@ -16,6 +16,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var GameService = (function () {
     function GameService() {
+        this.defaultConfig = {};
+        this.SUPPORTED_THEMES = ['dark', 'colorful'];
+        this.STORAGE_NAME = 'app_2048_storage';
+        this.gameState = [];
+        this.lastMoveDetails = {};
         this.defaultConfig = {
             grid: 4,
             touch: true,
@@ -27,10 +32,6 @@ var GameService = (function () {
             rememberState: true,
             theme: 'dark' // current theme
         };
-        this.SUPPORTED_THEMES = ['dark', 'colorful'];
-        this.STORAGE_NAME = 'app_2048_storage';
-        this.gameState = [];
-        this.lastMoveDetails = {};
         this.init();
     }
     /**
@@ -78,11 +79,11 @@ var GameService = (function () {
     GameService.prototype.init = function () {
         var /** @type {?} */ st = this.getState();
         this.lastMoveDetails = {};
-        if (st.gameState && this.defaultConfig.rememberState) {
+        if (st.gameState && this.defaultConfig && this.defaultConfig.rememberState) {
             this.gameState = st.gameState;
-            this.score = st.score;
-            this.highScore = st.highScore;
-            this.defaultConfig = st.config;
+            this.score = st.score || 0;
+            this.highScore = st.highScore || 0;
+            this.defaultConfig = st.config || this.defaultConfig;
             this.checkDeadlock();
         }
         else {
@@ -219,7 +220,7 @@ var GameService = (function () {
      */
     GameService.prototype.storeGameState = function (gameState) {
         this.gameState = gameState;
-        if (this.defaultConfig.rememberState) {
+        if (this.defaultConfig && this.defaultConfig.rememberState) {
             // tslint:disable-next-line:prefer-const
             var /** @type {?} */ currentState = this.getState();
             currentState.gameState = gameState;
@@ -240,7 +241,7 @@ var GameService = (function () {
      */
     GameService.prototype.saveConfig = function (config) {
         this.mergeConfig(config);
-        if (this.defaultConfig.rememberState) {
+        if (this.defaultConfig && this.defaultConfig.rememberState) {
             // tslint:disable-next-line:prefer-const
             var /** @type {?} */ st = this.getState();
             st.config = this.defaultConfig;
@@ -261,7 +262,7 @@ var GameService = (function () {
      */
     GameService.prototype.saveHighScore = function (score) {
         this.highScore = score;
-        if (this.defaultConfig.rememberState) {
+        if (this.defaultConfig && this.defaultConfig.rememberState) {
             // tslint:disable-next-line:prefer-const
             var /** @type {?} */ st = this.getState();
             st.highScore = score;
@@ -274,7 +275,7 @@ var GameService = (function () {
      */
     GameService.prototype.deleteHighScore = function () {
         this.highScore = 0;
-        if (this.defaultConfig.rememberState) {
+        if (this.defaultConfig && this.defaultConfig.rememberState) {
             // tslint:disable-next-line:prefer-const
             var /** @type {?} */ st = this.getState();
             st.highScore = 0;
@@ -298,7 +299,7 @@ var GameService = (function () {
         if (this.score > this.highScore) {
             this.saveHighScore(this.score);
         }
-        if (this.defaultConfig.rememberState) {
+        if (this.defaultConfig && this.defaultConfig.rememberState) {
             // tslint:disable-next-line:prefer-const
             var /** @type {?} */ st = this.getState();
             st.score = score;
@@ -311,7 +312,7 @@ var GameService = (function () {
      */
     GameService.prototype.deleteScore = function () {
         this.score = 0;
-        if (this.defaultConfig.rememberState) {
+        if (this.defaultConfig && this.defaultConfig.rememberState) {
             // tslint:disable-next-line:prefer-const
             var /** @type {?} */ st = this.getState();
             st.score = 0;
@@ -601,7 +602,6 @@ var GameComponent = (function () {
      */
     GameComponent.prototype.handle_key = function (event) {
         if (this.defaultConfig.keys) {
-            console.log(event.code, event.key);
             var /** @type {?} */ key = event.key.toLowerCase();
             switch (key) {
                 case 'w':

@@ -3,17 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GameService {
 
-  private defaultConfig = {
-    grid: 4, // no of grid to show
-    touch: true, // touch support
-    controls: false, // manual button control
-    keys: true, // arrow keys support
-    themeControl: true, // change theme drop-down
-    scoreIndicator: true, // show current score
-    highScore: true, // remember high score
-    rememberState: true, // use local storage for state presistense
-    theme: 'dark' // current theme
-  };
+  private defaultConfig:any = {};
 
   private SUPPORTED_THEMES: string[] = ['dark', 'colorful' ];
 
@@ -28,6 +18,17 @@ export class GameService {
   private lastMoveDetails: any = {};
 
   constructor() { 
+    this.defaultConfig = {
+      grid: 4, // no of grid to show
+      touch: true, // touch support
+      controls: false, // manual button control
+      keys: true, // arrow keys support
+      themeControl: true, // change theme drop-down
+      scoreIndicator: true, // show current score
+      highScore: true, // remember high score
+      rememberState: true, // use local storage for state presistense
+      theme: 'dark' // current theme
+    };
     this.init();
   }
 
@@ -73,11 +74,11 @@ export class GameService {
   public init() {
     const st = this.getState();
     this.lastMoveDetails = {};
-    if (st.gameState && this.defaultConfig.rememberState) {
+    if (st.gameState && this.defaultConfig && this.defaultConfig.rememberState) {
       this.gameState = st.gameState;
-      this.score = st.score;
-      this.highScore = st.highScore;
-      this.defaultConfig = st.config;
+      this.score = st.score || 0;
+      this.highScore = st.highScore || 0;
+      this.defaultConfig = st.config || this.defaultConfig;
       this.checkDeadlock();
     } else {
       this.newGame();
@@ -203,7 +204,7 @@ export class GameService {
    */
   public storeGameState(gameState: any) {
     this.gameState = gameState;
-    if (this.defaultConfig.rememberState) {
+    if (this.defaultConfig && this.defaultConfig.rememberState) {
       // tslint:disable-next-line:prefer-const
       let currentState = this.getState();
       currentState.gameState = gameState;
@@ -225,7 +226,7 @@ export class GameService {
   public saveConfig(config) {
     this.mergeConfig(config);
 
-    if (this.defaultConfig.rememberState) {
+    if (this.defaultConfig && this.defaultConfig.rememberState) {
       // tslint:disable-next-line:prefer-const
       let st = this.getState();
       st.config = this.defaultConfig;
@@ -246,7 +247,7 @@ export class GameService {
    */
   public saveHighScore(score: number) {
     this.highScore = score;
-    if (this.defaultConfig.rememberState) {
+    if (this.defaultConfig && this.defaultConfig.rememberState) {
       // tslint:disable-next-line:prefer-const
       let st = this.getState();
       st.highScore = score;
@@ -259,7 +260,7 @@ export class GameService {
    */
   public deleteHighScore() {
     this.highScore = 0;
-    if (this.defaultConfig.rememberState) {
+    if (this.defaultConfig && this.defaultConfig.rememberState) {
       // tslint:disable-next-line:prefer-const
       let st = this.getState();
       st.highScore = 0;
@@ -285,7 +286,7 @@ export class GameService {
       this.saveHighScore(this.score);
     }
 
-    if (this.defaultConfig.rememberState) {
+    if (this.defaultConfig && this.defaultConfig.rememberState) {
       // tslint:disable-next-line:prefer-const
       let st = this.getState();
       st.score = score;
@@ -298,7 +299,7 @@ export class GameService {
    */
   public deleteScore() {
     this.score = 0;
-    if (this.defaultConfig.rememberState) {
+    if (this.defaultConfig && this.defaultConfig.rememberState) {
       // tslint:disable-next-line:prefer-const
       let st = this.getState();
       st.score = 0;

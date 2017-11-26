@@ -48,7 +48,8 @@ export class GameComponent implements OnInit, AfterViewInit {
   constructor(
     private gameService: GameService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
   }
@@ -66,6 +67,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.highScore = this.gameService.getHighscore();
     this.allThemes = this.gameService.getAllThemes();
     this.cdr.detectChanges();
+
   }
 
   newgame() {
@@ -81,7 +83,6 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   handle_key(event: KeyboardEvent) {
     if (this.defaultConfig.keys) {
-      console.log(event.code, event.key);
       let key = event.key.toLowerCase();
 
       switch (key) {
