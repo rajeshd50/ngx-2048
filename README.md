@@ -2,6 +2,10 @@
 
 Angular 5 component for the popular game 2048.
 
+## Demo
+
+See here a demo made with angular5 (aot build) [click here](https://test-7885f.firebaseapp.com/)
+
 ## Usages
 
 First install the module,
